@@ -71,15 +71,7 @@ class DIContainer {
     
     private boolean isRequiredType(final Object bean, final Class<?> requiredClass) {
         Class<?> aClass = bean.getClass();
-        if (aClass == requiredClass) {
-            return true;
-        }
-        for (Class<?> aInterface : aClass.getInterfaces()) {
-            if (aInterface == requiredClass) {
-                return true;
-            }
-        }
-        return false;
+        return requiredClass.isAssignableFrom(aClass);
     }
 
     @SuppressWarnings("unchecked")
