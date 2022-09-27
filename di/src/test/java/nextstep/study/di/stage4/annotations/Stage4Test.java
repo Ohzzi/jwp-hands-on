@@ -1,9 +1,9 @@
 package nextstep.study.di.stage4.annotations;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import nextstep.study.User;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class Stage4Test {
 
@@ -22,6 +22,15 @@ class Stage4Test {
         final var actual = userService.join(user);
 
         assertThat(actual.getAccount()).isEqualTo("gugu");
+    }
+
+    @Test
+    void stage4_interface() {
+        DIContainer diContext = createDIContainer();
+        UserDao userDao = diContext.getBean(UserDao.class);
+        InMemoryUserDao inMemoryUserDao = diContext.getBean(InMemoryUserDao.class);
+
+        assertThat(userDao).isSameAs(inMemoryUserDao);
     }
 
     private static DIContainer createDIContainer() {
